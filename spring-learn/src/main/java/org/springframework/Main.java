@@ -1,17 +1,19 @@
 package org.springframework;
 
-import org.springframework.config.AppConfig;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.service.UserService;
 import org.springframework.service.impl.UserServiceImpl;
 
 public class Main {
 	public static void main(String[] args) {
 
-		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:AopTest.xml");
 
-		UserServiceImpl appConfig = applicationContext.getBean("userServiceImpl", UserServiceImpl.class);
+		UserService appConfig = applicationContext.getBean("userServiceImpl", UserService.class);
+		System.out.println("代理对象:" + appConfig);
 		appConfig.test();
-
-		System.out.println("Hello world!");
 	}
+
 }
